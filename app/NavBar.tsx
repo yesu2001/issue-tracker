@@ -2,42 +2,35 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React from "react";
 import { AiFillBug } from "react-icons/ai";
-import classnames from "classnames";
 
-export const NavBar = () => {
-  const currentPath = usePathname();
+const NavBar = () => {
+  const currentpath = usePathname();
   const links = [
-    {
-      label: "Dashboard",
-      link: "/",
-    },
-    {
-      label: "Issues",
-      link: "/issues",
-    },
+    { lable: "Dashboard", href: "/" },
+    { lable: "Issues", href: "/issues" },
   ];
   return (
-    <nav className="flex space-x-6 border-b mb-6 px-5 h-14 items-center">
-      <Link href="/">
+    <nav className="flex space-x-6 border-b px-5 mb-5 h-14 items-center">
+      <Link href="/" className="text-3xl">
         <AiFillBug />
       </Link>
       <ul className="flex space-x-6">
         {links.map((link) => (
           <Link
-            key={link.label}
-            href={link.link}
-            className={classnames({
-              "text-zinc-900": link.link === currentPath,
-              "text-zinc-500": link.link !== currentPath,
-              "hover:text-zinc-800 transition-colors": true,
-            })}
+            key={link.href}
+            href={link.href}
+            className={`${
+              link.href == currentpath ? "text-zinc-900" : "text-zinc-500"
+            } hover:text-zinc-800 transition-colors`}
           >
-            {link.label}
+            {" "}
+            {link.lable}
           </Link>
         ))}
       </ul>
     </nav>
   );
 };
+
+export default NavBar;
